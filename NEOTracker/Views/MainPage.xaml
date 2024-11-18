@@ -1,0 +1,33 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NEOTracker.Views.MainPage"
+             Title="NEO Tracker">
+    <StackLayout Padding="20" Spacing="10">
+        <!-- Tlačítka -->
+        <Button Text="Fetch and Save Asteroids" Clicked="FetchAndSaveAsteroids" />
+        <Button Text="Show Saved Asteroids" Clicked="ShowSavedAsteroids" />
+
+        <!-- Zobrazení asteroidů -->
+        <ListView x:Name="AsteroidsListView" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10" Spacing="5">
+                            <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold" />
+                            <Label Text="Details:" FontAttributes="Italic" />
+                            <Label Text="{Binding NeoReferenceId}" />
+                            <Label Text="{Binding CloseApproachDateFull}" />
+                            <Label Text="Estimated Diameter (km):" />
+                            <Label Text="{Binding EstimatedDiameterMinKm}" />
+                            <Label Text="{Binding EstimatedDiameterMaxKm}" />
+                            <Label Text="Relative Velocity (km/s):" />
+                            <Label Text="{Binding RelativeVelocityKmPerSec}" />
+                            <Label Text="Miss Distance (km):" />
+                            <Label Text="{Binding MissDistanceKm}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
