@@ -1047,3 +1047,4 @@ C:\Users\TIGO\source\repos\NEOTracker\NEOTracker\obj\Debug\net8.0-android\stamp\
 C:\Users\TIGO\source\repos\NEOTracker\NEOTracker\obj\Debug\net8.0-android\stamp\_GenerateJavaStubs.stamp
 C:\Users\TIGO\source\repos\NEOTracker\NEOTracker\obj\Debug\net8.0-android\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\TIGO\source\repos\NEOTracker\NEOTracker\obj\Debug\net8.0-android\stamp\_ResolveLibraryProjectImports.stamp
+C:\Users\TIGO\source\repos\NEOTracker\NEOTracker\obj\Debug\net8.0-android\NEOTracker.sourcelink.json

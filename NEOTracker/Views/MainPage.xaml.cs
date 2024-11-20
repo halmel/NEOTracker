@@ -17,7 +17,7 @@ namespace NEOTracker.Views
 
         private async void FetchAndSaveAsteroids(object sender, EventArgs e)
         {
-            var asteroids = await _apiService.FetchAsteroidsAsync("https://api.nasa.gov/neo/rest/v1/neo/3542519?api_key=zPmwhTa6grD5ahplZADOQrn7BOMvsDLUEgWHyWb5");
+            var asteroids = await _apiService.FetchAsteroidsAsync();
             foreach (var asteroid in asteroids)
             {
                 await _databaseService.AddAsteroidAsync(asteroid);

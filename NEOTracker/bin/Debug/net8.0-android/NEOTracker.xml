@@ -4,5 +4,30 @@
         <name>NEOTracker</name>
     </assembly>
     <members>
+        <member name="E:NEOTracker.ViewModels.BaseViewModel.PropertyChanged">
+            <summary>
+            Event to notify when a property changes.
+            </summary>
+        </member>
+        <member name="P:NEOTracker.ViewModels.BaseViewModel.IsBusy">
+            <summary>
+            Indicates whether the view model is busy.
+            </summary>
+        </member>
+        <member name="P:NEOTracker.ViewModels.BaseViewModel.Title">
+            <summary>
+            The title of the current view.
+            </summary>
+        </member>
+        <member name="M:NEOTracker.ViewModels.BaseViewModel.SetProperty``1(``0@,``0,System.String)">
+            <summary>
+            Updates the property value and raises the PropertyChanged event.
+            </summary>
+        </member>
+        <member name="M:NEOTracker.ViewModels.BaseViewModel.OnPropertyChanged(System.String)">
+            <summary>
+            Raises the PropertyChanged event.
+            </summary>
+        </member>
     </members>
 </doc>

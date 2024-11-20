@@ -49,7 +49,7 @@ namespace NEOTracker.Services
                     EstimatedDiameterMaxKm REAL NOT NULL,
                     IsPotentiallyHazardous INTEGER NOT NULL,
                     CloseApproachDate TEXT NOT NULL,
-                    CloseApproachDateFull TEXT,
+                    CloseApproachDateFull TEXT NOT NULL,
                     RelativeVelocityKmPerSec REAL NOT NULL,
                     MissDistanceKm REAL NOT NULL,
                     OrbitingBody TEXT NOT NULL
@@ -71,19 +71,11 @@ namespace NEOTracker.Services
             var insertCommand = connection.CreateCommand();
             insertCommand.CommandText =
             @"
-                INSERT INTO Asteroids (
-                    NeoReferenceId, Name, NasaJplUrl, AbsoluteMagnitudeH,
-                    EstimatedDiameterMinKm, EstimatedDiameterMaxKm,
-                    IsPotentiallyHazardous, CloseApproachDate, CloseApproachDateFull,
-                    RelativeVelocityKmPerSec, MissDistanceKm, OrbitingBody
-                ) VALUES (
-                    $neoReferenceId, $name, $nasaJplUrl, $absoluteMagnitudeH,
-                    $estimatedDiameterMinKm, $estimatedDiameterMaxKm,
-                    $isPotentiallyHazardous, $closeApproachDate, $closeApproachDateFull,
-                    $relativeVelocityKmPerSec, $missDistanceKm, $orbitingBody
-                )
+            INSERT INTO Asteroids 
+                (NeoReferenceId, Name, NasaJplUrl, AbsoluteMagnitudeH, EstimatedDiameterMinKm, EstimatedDiameterMaxKm, IsPotentiallyHazardous, CloseApproachDate, CloseApproachDateFull, RelativeVelocityKmPerSec, MissDistanceKm, OrbitingBody)
+            VALUES
+                ($neoReferenceId, $name, $nasaJplUrl, $absoluteMagnitudeH, $estimatedDiameterMinKm, $estimatedDiameterMaxKm, $isPotentiallyHazardous, $closeApproachDate, $closeApproachDateFull, $relativeVelocityKmPerSec, $missDistanceKm, $orbitingBody)
             ";
-
             insertCommand.Parameters.AddWithValue("$neoReferenceId", asteroid.NeoReferenceId);
             insertCommand.Parameters.AddWithValue("$name", asteroid.Name);
             insertCommand.Parameters.AddWithValue("$nasaJplUrl", asteroid.NasaJplUrl);
@@ -92,7 +84,7 @@ namespace NEOTracker.Services
             insertCommand.Parameters.AddWithValue("$estimatedDiameterMaxKm", asteroid.EstimatedDiameterMaxKm);
             insertCommand.Parameters.AddWithValue("$isPotentiallyHazardous", asteroid.IsPotentiallyHazardous ? 1 : 0);
             insertCommand.Parameters.AddWithValue("$closeApproachDate", asteroid.CloseApproachDate);
-            insertCommand.Parameters.AddWithValue("$closeApproachDateFull", asteroid.CloseApproachDateFull ?? string.Empty);
+            insertCommand.Parameters.AddWithValue("$closeApproachDateFull", asteroid.CloseApproachDateFull);
             insertCommand.Parameters.AddWithValue("$relativeVelocityKmPerSec", asteroid.RelativeVelocityKmPerSec);
             insertCommand.Parameters.AddWithValue("$missDistanceKm", asteroid.MissDistanceKm);
             insertCommand.Parameters.AddWithValue("$orbitingBody", asteroid.OrbitingBody);
@@ -108,47 +100,30 @@ namespace NEOTracker.Services
             await connection.OpenAsync();
 
             var selectCommand = connection.CreateCommand();
-            selectCommand.CommandText =
-            @"
-                SELECT NeoReferenceId, Name, NasaJplUrl, AbsoluteMagnitudeH,
-                       EstimatedDiameterMinKm, EstimatedDiameterMaxKm,
-                       IsPotentiallyHazardous, CloseApproachDate, CloseApproachDateFull,
-                       RelativeVelocityKmPerSec, MissDistanceKm, OrbitingBody
-                FROM Asteroids
-            ";
+            selectCommand.CommandText = "SELECT * FROM Asteroids";
 
             using var reader = await selectCommand.ExecuteReaderAsync();
             while (await reader.ReadAsync())
             {
                 var asteroid = new Asteroid
                 {
-                    NeoReferenceId = reader.GetString(0),
-                    Name = reader.GetString(1),
-                    NasaJplUrl = reader.GetString(2),
-                    AbsoluteMagnitudeH = reader.GetDouble(3),
-                    EstimatedDiameterMinKm = reader.GetDouble(4),
-                    EstimatedDiameterMaxKm = reader.GetDouble(5),
-                    IsPotentiallyHazardous = reader.GetInt32(6) == 1,
-                    CloseApproachDate = reader.GetString(7),
-                    CloseApproachDateFull = reader.IsDBNull(8) ? null : reader.GetString(8),
-                    RelativeVelocityKmPerSec = reader.GetDouble(9),
-                    MissDistanceKm = reader.GetDouble(10),
-                    OrbitingBody = reader.GetString(11)
+                    NeoReferenceId = reader.GetString(1),
+                    Name = reader.GetString(2),
+                    NasaJplUrl = reader.GetString(3),
+                    AbsoluteMagnitudeH = reader.GetDouble(4),
+                    EstimatedDiameterMinKm = reader.GetDouble(5),
+                    EstimatedDiameterMaxKm = reader.GetDouble(6),
+                    IsPotentiallyHazardous = reader.GetInt32(7) == 1,
+                    CloseApproachDate = reader.GetString(8),
+                    CloseApproachDateFull = reader.GetString(9),
+                    RelativeVelocityKmPerSec = reader.GetDouble(10),
+                    MissDistanceKm = reader.GetDouble(11),
+                    OrbitingBody = reader.GetString(12)
                 };
                 asteroids.Add(asteroid);
             }
 
             return asteroids;
-        }
-
-        public async Task DeleteAllAsteroidsAsync()
-        {
-            using var connection = new SqliteConnection($"Data Source={_databasePath}");
-            await connection.OpenAsync();
-
-            var deleteCommand = connection.CreateCommand();
-            deleteCommand.CommandText = "DELETE FROM Asteroids";
-            await deleteCommand.ExecuteNonQueryAsync();
         }
     }
 }

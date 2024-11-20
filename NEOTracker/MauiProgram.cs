@@ -1,25 +1,30 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Maui.Hosting;
+using NEOTracker.Services;
+using NEOTracker.ViewModels;
+using NEOTracker.Views;
 
-namespace NEOTracker
+namespace NEOTracker;
+
+public static class MauiProgram
 {
-    public static class MauiProgram
+    public static MauiApp CreateMauiApp()
     {
-        public static MauiApp CreateMauiApp()
-        {
-            var builder = MauiApp.CreateBuilder();
-            builder
-                .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+        var builder = MauiApp.CreateBuilder();
+        builder
+            .UseMauiApp<App>()
+            .ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+            });
 
-#if DEBUG
-    		builder.Logging.AddDebug();
-#endif
+        // Register services for Dependency Injection
+        builder.Services.AddSingleton<IDatabaseService>(s => DatabaseService.GetInstance("asteroids.db"));
+        builder.Services.AddSingleton<NEOApiService>();
+        builder.Services.AddSingleton<AsteroidsViewModel>();
+        builder.Services.AddSingleton<MainPage>();
 
-            return builder.Build();
-        }
+        return builder.Build();
     }
 }
