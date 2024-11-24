@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                         xmlns:models="clr-namespace:NEOTracker.Models"
+             x:Class="NEOTracker.Views.Settings"
+             Title="Settings">
+        <ContentPage.BindingContext>
+            <models:Settings />
+        </ContentPage.BindingContext>
+    <VerticalStackLayout>
+        <Label 
+            Text="Set Nasa API KEY"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Entry x:Name="ApiKey"  Placeholder="DEMO_KEY"
+                Completed="OnEntryCompleted" Text="{Binding NasaKey}">
+            
+        </Entry>
+    </VerticalStackLayout>
+</ContentPage>

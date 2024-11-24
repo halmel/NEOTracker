@@ -3,6 +3,8 @@ public class MonoPackageManager_Resources {
 	public static String[] Assemblies = new String[]{
 		/* We need to ensure that "NEOTracker.dll" comes first in this list. */
 		"NEOTracker.dll",
+		"CommunityToolkit.Maui.dll",
+		"CommunityToolkit.Maui.Core.dll",
 		"GoogleGson.dll",
 		"Microsoft.Data.Sqlite.dll",
 		"Microsoft.Extensions.Configuration.dll",

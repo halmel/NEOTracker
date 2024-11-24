@@ -2,32 +2,122 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NEOTracker.Views.MainPage"
              Title="NEO Tracker">
-    <StackLayout Padding="20" Spacing="10">
-        <!-- Tlačítka -->
-        <Button Text="Fetch and Save Asteroids" Clicked="FetchAndSaveAsteroids" />
-        <Button Text="Show Saved Asteroids" Clicked="ShowSavedAsteroids" />
+    <!-- Wrap the entire layout in a ScrollView to enable scrolling -->
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="10">
+            <!-- Buttons for actions -->
+            <Button Text="Fetch and Save Asteroids" Clicked="FetchAndSaveAsteroids" />
+            <Button Text="Show Saved Asteroids" Clicked="ShowSavedAsteroids" />
+            <Button Text="Delete Database" Clicked="DeleteDB" />
 
-        <!-- Zobrazení asteroidů -->
-        <ListView x:Name="AsteroidsListView" HasUnevenRows="True">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Padding="10" Spacing="5">
-                            <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold" />
-                            <Label Text="Details:" FontAttributes="Italic" />
-                            <Label Text="{Binding NeoReferenceId}" />
-                            <Label Text="{Binding CloseApproachDateFull}" />
-                            <Label Text="Estimated Diameter (km):" />
-                            <Label Text="{Binding EstimatedDiameterMinKm}" />
-                            <Label Text="{Binding EstimatedDiameterMaxKm}" />
-                            <Label Text="Relative Velocity (km/s):" />
-                            <Label Text="{Binding RelativeVelocityKmPerSec}" />
-                            <Label Text="Miss Distance (km):" />
-                            <Label Text="{Binding MissDistanceKm}" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+            <!-- CollectionView for displaying asteroid data -->
+            <CollectionView x:Name="AsteroidsCollectionView" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="0,5" BorderColor="Gray" BackgroundColor="White" HasShadow="True">
+                            <StackLayout Spacing="10" Orientation="Horizontal">
+                                <!-- Left side: Textual information -->
+                                <StackLayout Spacing="5">
+                                    <Label Text="Name:" FontSize="14" FontAttributes="Bold" />
+                                    <Label Text="{Binding Name}" FontSize="16" />
+
+                                    <Label Text="Size: Km" FontSize="14" FontAttributes="Bold" />
+                                    <Label Text="{Binding EstimatedDiameterDisplay}" FontSize="14" />
+
+                                    <Label Text="Speed: Km/s" FontSize="14" FontAttributes="Bold" />
+                                    <Label Text="{Binding RelativeVelocityKmPerSec}" FontSize="14" />
+                                </StackLayout>
+
+                                <!-- Right side: Graphical representation -->
+                                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="Center" RowSpacing="0" ColumnSpacing="10">
+                                    <!-- Define columns for layout -->
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <!-- Size icon column -->
+                                        <ColumnDefinition Width="*"/>
+                                        <!-- Space for asteroid icon -->
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Define rows for layout -->
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <!-- Row for size icon and asteroid icon -->
+                                        <RowDefinition Height="10"/>
+                                        <!-- Spacer row between icons and distance bar -->
+                                        <RowDefinition Height="Auto"/>
+                                        <!-- Row for the distance bar and planet icons -->
+                                    </Grid.RowDefinitions>
+
+                                    <!-- Placeholder for asteroid size icons on the left -->
+                                    <Image 
+                                        Source="{Binding SizeIcon}" 
+                                        WidthRequest="50" 
+                                        HeightRequest="50" 
+                                        VerticalOptions="Center" 
+                                        HorizontalOptions="Center" 
+                                        Grid.Column="0" 
+                                        Grid.Row="0" />
+
+                                    <!-- Asteroid icon on the right -->
+                                    <Image 
+                                        Source="asteroid_icon.png" 
+                                        WidthRequest="{Binding SizeIconWidth}" 
+                                        HeightRequest="{Binding SizeIconHeight}" 
+                                        VerticalOptions="Center" 
+                                        HorizontalOptions="Center" 
+                                        Grid.Column="1" 
+                                        Grid.Row="0" />
+
+                                    <!-- Spacer row between icons and distance bar -->
+                                    <Grid RowSpacing="0" Grid.Row="1" />
+
+                                    <!-- Distance bar -->
+                                    <BoxView 
+                                        HeightRequest="4" 
+                                        Color="Gray" 
+                                        VerticalOptions="End" 
+                                        HorizontalOptions="FillAndExpand" 
+                                        Margin="0,0,0,20" 
+                                        Grid.Row="2" 
+                                        Grid.ColumnSpan="2"/>
+
+                                    <!-- Earth, Moon, and Asteroid icons for the distance bar -->
+                                    <Image 
+                                        Source="earth_icon.png" 
+                                        WidthRequest="20" 
+                                        HeightRequest="20" 
+                                        VerticalOptions="End" 
+                                        HorizontalOptions="Start" 
+                                        Margin="5,0,0,0" 
+                                        Grid.Row="2" 
+                                        Grid.Column="0"/>
+
+                                    <!--<Image 
+                                        Source="moon_icon.png" 
+                                        WidthRequest="20" 
+                                        HeightRequest="20" 
+                                        VerticalOptions="End" 
+                                        HorizontalOptions="Center" 
+                                        Grid.Row="2" 
+                                        Grid.Column="1"/>-->
+
+                                    <!-- Adjust the asteroid's X position based on the MissDistanceKm -->
+                                    <Image 
+                                        Source="asteroid_icon.png" 
+                                        WidthRequest="20" 
+                                        HeightRequest="20" 
+                                        VerticalOptions="End" 
+                                        HorizontalOptions="Start" 
+                                        Margin="0,0,5,0" 
+                                        Grid.Row="2" 
+                                        Grid.Column="2"
+                                        TranslationX="{Binding MissDistanceOffset}" />
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

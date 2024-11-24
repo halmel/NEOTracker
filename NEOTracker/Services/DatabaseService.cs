@@ -39,21 +39,21 @@ namespace NEOTracker.Services
                 var createTableCommand = connection.CreateCommand();
                 createTableCommand.CommandText =
                 @"
-                CREATE TABLE IF NOT EXISTS Asteroids (
-                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    NeoReferenceId TEXT NOT NULL,
-                    Name TEXT NOT NULL,
-                    NasaJplUrl TEXT NOT NULL,
-                    AbsoluteMagnitudeH REAL NOT NULL,
-                    EstimatedDiameterMinKm REAL NOT NULL,
-                    EstimatedDiameterMaxKm REAL NOT NULL,
-                    IsPotentiallyHazardous INTEGER NOT NULL,
-                    CloseApproachDate TEXT NOT NULL,
-                    CloseApproachDateFull TEXT NOT NULL,
-                    RelativeVelocityKmPerSec REAL NOT NULL,
-                    MissDistanceKm REAL NOT NULL,
-                    OrbitingBody TEXT NOT NULL
-                )
+CREATE TABLE IF NOT EXISTS Asteroids (
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    NeoReferenceId TEXT NOT NULL,
+    Name TEXT NOT NULL,
+    NasaJplUrl TEXT NOT NULL,
+    AbsoluteMagnitudeH REAL NOT NULL,
+    EstimatedDiameterMinKm REAL NOT NULL,
+    EstimatedDiameterMaxKm REAL NOT NULL,
+    IsPotentiallyHazardous INTEGER NOT NULL,
+    CloseApproachDate TEXT NOT NULL,
+    CloseApproachDateFull TEXT NOT NULL,
+    RelativeVelocityKmPerSec REAL NOT NULL,
+    MissDistanceKm REAL NOT NULL,
+    OrbitingBody TEXT NOT NULL
+);
                 ";
                 createTableCommand.ExecuteNonQuery();
             }
@@ -68,14 +68,32 @@ namespace NEOTracker.Services
             using var connection = new SqliteConnection($"Data Source={_databasePath}");
             await connection.OpenAsync();
 
+            // Check if the asteroid already exists
+            var checkCommand = connection.CreateCommand();
+            checkCommand.CommandText =
+            @"
+    SELECT COUNT(*) 
+    FROM Asteroids 
+    WHERE NeoReferenceId = $neoReferenceId
+    ";
+            checkCommand.Parameters.AddWithValue("$neoReferenceId", asteroid.NeoReferenceId);
+
+            var count = (long)await checkCommand.ExecuteScalarAsync();
+            if (count > 0)
+            {
+                // The asteroid already exists, so we skip insertion
+                return;
+            }
+
+            // Insert the new asteroid
             var insertCommand = connection.CreateCommand();
             insertCommand.CommandText =
             @"
-            INSERT INTO Asteroids 
-                (NeoReferenceId, Name, NasaJplUrl, AbsoluteMagnitudeH, EstimatedDiameterMinKm, EstimatedDiameterMaxKm, IsPotentiallyHazardous, CloseApproachDate, CloseApproachDateFull, RelativeVelocityKmPerSec, MissDistanceKm, OrbitingBody)
-            VALUES
-                ($neoReferenceId, $name, $nasaJplUrl, $absoluteMagnitudeH, $estimatedDiameterMinKm, $estimatedDiameterMaxKm, $isPotentiallyHazardous, $closeApproachDate, $closeApproachDateFull, $relativeVelocityKmPerSec, $missDistanceKm, $orbitingBody)
-            ";
+    INSERT INTO Asteroids 
+        (NeoReferenceId, Name, NasaJplUrl, AbsoluteMagnitudeH, EstimatedDiameterMinKm, EstimatedDiameterMaxKm, IsPotentiallyHazardous, CloseApproachDate, CloseApproachDateFull, RelativeVelocityKmPerSec, MissDistanceKm, OrbitingBody)
+    VALUES
+        ($neoReferenceId, $name, $nasaJplUrl, $absoluteMagnitudeH, $estimatedDiameterMinKm, $estimatedDiameterMaxKm, $isPotentiallyHazardous, $closeApproachDate, $closeApproachDateFull, $relativeVelocityKmPerSec, $missDistanceKm, $orbitingBody)
+    ";
             insertCommand.Parameters.AddWithValue("$neoReferenceId", asteroid.NeoReferenceId);
             insertCommand.Parameters.AddWithValue("$name", asteroid.Name);
             insertCommand.Parameters.AddWithValue("$nasaJplUrl", asteroid.NasaJplUrl);
@@ -118,12 +136,28 @@ namespace NEOTracker.Services
                     CloseApproachDateFull = reader.GetString(9),
                     RelativeVelocityKmPerSec = reader.GetDouble(10),
                     MissDistanceKm = reader.GetDouble(11),
-                    OrbitingBody = reader.GetString(12)
+                    OrbitingBody = reader.GetString(12),
                 };
                 asteroids.Add(asteroid);
             }
 
             return asteroids;
+        }
+
+        public async Task ClearDatabaseAsync()
+        {
+            try
+            {
+                if (File.Exists(_databasePath))
+                {
+                    File.Delete(_databasePath);
+                    await Task.Delay(100); // Allow time for the deletion to complete
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting database file: {ex.Message}");
+            }
         }
     }
 }

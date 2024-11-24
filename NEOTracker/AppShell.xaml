@@ -3,7 +3,16 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        x:Class="NEOTracker.AppShell"
                      xmlns:views="clr-namespace:NEOTracker.Views"
+       xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+
        >
 
-    <ShellContent ContentTemplate="{DataTemplate views:MainPage}" />
+    <TabBar>
+        <Tab Title="NEO">
+            <ShellContent ContentTemplate="{DataTemplate views:MainPage}" />
+        </Tab>
+        <Tab Title="Settings">
+            <ShellContent ContentTemplate="{DataTemplate views:Settings}" />
+        </Tab>
+    </TabBar>
 </Shell>

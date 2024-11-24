@@ -19,12 +19,23 @@ namespace NEOTracker.Services
         public async Task<List<Asteroid>> FetchAsteroidsAsync()
         {
             // Set the API key and construct the URL dynamically
-            var apiKey = "zPmwhTa6grD5ahplZADOQrn7BOMvsDLUEgWHyWb5";
+            if (!Preferences.Default.ContainsKey("Key"))
+            {
+                Preferences.Default.Set("Key", "DEMO_KEY");
+            }
+            //var apiKey = "zPmwhTa6grD5ahplZADOQrn7BOMvsDLUEgWHyWb5";
+            var apiKey = Preferences.Default.Get("Key", "DEMO_KEY");
             var currentDate = DateTime.UtcNow.ToString("yyyy-MM-dd");
-            var apiUrl = $"https://api.nasa.gov/neo/rest/v1/feed?start_date={currentDate}&end_date={currentDate}&api_key={apiKey}";
+            var qurrentDate = DateTime.UtcNow.AddDays(-7).ToString("yyyy-MM-dd");
+            var apiUrl = $"https://api.nasa.gov/neo/rest/v1/feed?start_date={qurrentDate}&end_date={currentDate}&api_key={apiKey}";
 
             // Fetch data from the API
             var response = await _httpClient.GetAsync(apiUrl);
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                await Application.Current.MainPage.DisplayAlert("Bad response", "Check the api key", "OK");
+                return new List<Asteroid>();
+            }
             response.EnsureSuccessStatusCode();
 
             // Read and parse the JSON response
