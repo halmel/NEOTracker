@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\TIGO\\source\\repos\\NEOTracker\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8D0DBA41-585E-4E24-82B1-67D9718F2C1F}|NEOTracker\\NEOTracker.csproj|c:\\users\\tigo\\source\\repos\\neotracker\\neotracker\\views\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D0DBA41-585E-4E24-82B1-67D9718F2C1F}|NEOTracker\\NEOTracker.csproj|solutionrelative:neotracker\\views\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8D0DBA41-585E-4E24-82B1-67D9718F2C1F}|NEOTracker\\NEOTracker.csproj|c:\\users\\tigo\\source\\repos\\neotracker\\neotracker\\views\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{8D0DBA41-585E-4E24-82B1-67D9718F2C1F}|NEOTracker\\NEOTracker.csproj|solutionrelative:neotracker\\views\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
@@ -17,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{8D0DBA41-585E-4E24-82B1-67D9718F2C1F}|NEOTracker\\NEOTracker.csproj|c:\\users\\tigo\\source\\repos\\neotracker\\neotracker\\services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8D0DBA41-585E-4E24-82B1-67D9718F2C1F}|NEOTracker\\NEOTracker.csproj|solutionrelative:neotracker\\services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8D0DBA41-585E-4E24-82B1-67D9718F2C1F}|NEOTracker\\NEOTracker.csproj|c:\\users\\tigo\\source\\repos\\neotracker\\neotracker\\views\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8D0DBA41-585E-4E24-82B1-67D9718F2C1F}|NEOTracker\\NEOTracker.csproj|solutionrelative:neotracker\\views\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8D0DBA41-585E-4E24-82B1-67D9718F2C1F}|NEOTracker\\NEOTracker.csproj|c:\\users\\tigo\\source\\repos\\neotracker\\neotracker\\views\\settings.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -69,7 +69,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
@@ -81,51 +81,50 @@
               "RelativeToolTip": "NEOTracker\\AppShell.xaml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-18T17:43:48.731Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-18T17:43:48.731Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MainPage.xaml",
               "DocumentMoniker": "C:\\Users\\TIGO\\source\\repos\\NEOTracker\\NEOTracker\\Views\\MainPage.xaml",
               "RelativeDocumentMoniker": "NEOTracker\\Views\\MainPage.xaml",
               "ToolTip": "C:\\Users\\TIGO\\source\\repos\\NEOTracker\\NEOTracker\\Views\\MainPage.xaml",
               "RelativeToolTip": "NEOTracker\\Views\\MainPage.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-11-18T17:37:37.119Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "MainPage.xaml.cs",
               "DocumentMoniker": "C:\\Users\\TIGO\\source\\repos\\NEOTracker\\NEOTracker\\Views\\MainPage.xaml.cs",
               "RelativeDocumentMoniker": "NEOTracker\\Views\\MainPage.xaml.cs",
               "ToolTip": "C:\\Users\\TIGO\\source\\repos\\NEOTracker\\NEOTracker\\Views\\MainPage.xaml.cs",
               "RelativeToolTip": "NEOTracker\\Views\\MainPage.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFAAAABWAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAB0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-18T17:37:48.254Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Asteroid.cs",
               "DocumentMoniker": "C:\\Users\\TIGO\\source\\repos\\NEOTracker\\NEOTracker\\Models\\Asteroid.cs",
               "RelativeDocumentMoniker": "NEOTracker\\Models\\Asteroid.cs",
               "ToolTip": "C:\\Users\\TIGO\\source\\repos\\NEOTracker\\NEOTracker\\Models\\Asteroid.cs",
               "RelativeToolTip": "NEOTracker\\Models\\Asteroid.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAYwA8AAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAzwA8AAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-18T16:16:19.52Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "NEOApiService.cs",
               "DocumentMoniker": "C:\\Users\\TIGO\\source\\repos\\NEOTracker\\NEOTracker\\Services\\NEOApiService.cs",
               "RelativeDocumentMoniker": "NEOTracker\\Services\\NEOApiService.cs",
@@ -157,7 +156,7 @@
               "RelativeDocumentMoniker": "NEOTracker\\ViewModels\\AsteroidsViewModel.cs",
               "ToolTip": "C:\\Users\\TIGO\\source\\repos\\NEOTracker\\NEOTracker\\ViewModels\\AsteroidsViewModel.cs",
               "RelativeToolTip": "NEOTracker\\ViewModels\\AsteroidsViewModel.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAApwBoAAABEAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAIA5wBoAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-20T15:18:55.799Z",
               "EditorCaption": ""
@@ -177,7 +176,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "DatabaseService.cs",
               "DocumentMoniker": "C:\\Users\\TIGO\\source\\repos\\NEOTracker\\NEOTracker\\Services\\DatabaseService.cs",
               "RelativeDocumentMoniker": "NEOTracker\\Services\\DatabaseService.cs",

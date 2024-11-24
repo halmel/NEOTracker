@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NEOTracker")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+df265c23894b89165771f766cf076b5bf0ff13c4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+d3d118667a51ca90b29f313c0175f71283daae7b")]
 [assembly: System.Reflection.AssemblyProductAttribute("NEOTracker")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NEOTracker")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

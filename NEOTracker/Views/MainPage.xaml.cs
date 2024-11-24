@@ -8,6 +8,7 @@ namespace NEOTracker.Views
     {
         private readonly DatabaseService _databaseService;
         private readonly NEOApiService _apiService;
+        private bool _isActionsVisible = false;
 
         // ObservableCollection to bind to the CollectionView
         private readonly ObservableCollection<Asteroid> _asteroids;
@@ -21,6 +22,11 @@ namespace NEOTracker.Views
 
             _asteroids = new ObservableCollection<Asteroid>();
             AsteroidsCollectionView.ItemsSource = _asteroids; // Bind the CollectionView
+        }
+        private void ToggleActionsVisibility(object sender, EventArgs e)
+        {
+            _isActionsVisible = !_isActionsVisible;
+            ActionsList.IsVisible = _isActionsVisible;
         }
 
         // Fetch and save asteroids from the API

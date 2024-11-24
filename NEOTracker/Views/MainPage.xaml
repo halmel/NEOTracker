@@ -6,9 +6,14 @@
     <ScrollView>
         <StackLayout Padding="20" Spacing="10">
             <!-- Buttons for actions -->
-            <Button Text="Fetch and Save Asteroids" Clicked="FetchAndSaveAsteroids" />
-            <Button Text="Show Saved Asteroids" Clicked="ShowSavedAsteroids" />
-            <Button Text="Delete Database" Clicked="DeleteDB" />
+            <Button Text="Actions" Clicked="ToggleActionsVisibility" />
+
+            <!-- Action List (initially hidden) -->
+            <StackLayout x:Name="ActionsList" IsVisible="False" Padding="10" BackgroundColor="LightGray" Spacing="5">
+                <Button Text="Fetch and Save Asteroids" Clicked="FetchAndSaveAsteroids" />
+                <Button Text="Show Saved Asteroids" Clicked="ShowSavedAsteroids" />
+                <Button Text="Delete Database" Clicked="DeleteDB" />
+            </StackLayout>
 
             <!-- CollectionView for displaying asteroid data -->
             <CollectionView x:Name="AsteroidsCollectionView" SelectionMode="None">
