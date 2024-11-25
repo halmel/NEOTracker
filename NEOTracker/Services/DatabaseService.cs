@@ -68,8 +68,7 @@ CREATE TABLE IF NOT EXISTS Asteroids (
             using var connection = new SqliteConnection($"Data Source={_databasePath}");
             await connection.OpenAsync();
 
-            // Check if the asteroid already exists
-            var checkCommand = connection.CreateCommand();
+                         var checkCommand = connection.CreateCommand();
             checkCommand.CommandText =
             @"
     SELECT COUNT(*) 
@@ -81,12 +80,10 @@ CREATE TABLE IF NOT EXISTS Asteroids (
             var count = (long)await checkCommand.ExecuteScalarAsync();
             if (count > 0)
             {
-                // The asteroid already exists, so we skip insertion
-                return;
+                                 return;
             }
 
-            // Insert the new asteroid
-            var insertCommand = connection.CreateCommand();
+                         var insertCommand = connection.CreateCommand();
             insertCommand.CommandText =
             @"
     INSERT INTO Asteroids 
@@ -151,8 +148,7 @@ CREATE TABLE IF NOT EXISTS Asteroids (
                 if (File.Exists(_databasePath))
                 {
                     File.Delete(_databasePath);
-                    await Task.Delay(100); // Allow time for the deletion to complete
-                }
+                    await Task.Delay(100);                  }
             }
             catch (Exception ex)
             {

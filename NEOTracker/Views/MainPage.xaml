@@ -2,27 +2,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NEOTracker.Views.MainPage"
              Title="NEO Tracker">
-    <!-- Wrap the entire layout in a ScrollView to enable scrolling -->
-    <ScrollView>
+         <ScrollView>
         <StackLayout Padding="20" Spacing="10">
-            <!-- Buttons for actions -->
-            <Button Text="Actions" Clicked="ToggleActionsVisibility" />
+                         <Button Text="Actions" Clicked="ToggleActionsVisibility" />
 
-            <!-- Action List (initially hidden) -->
-            <StackLayout x:Name="ActionsList" IsVisible="False" Padding="10" BackgroundColor="LightGray" Spacing="5">
+                         <StackLayout x:Name="ActionsList" IsVisible="False" Padding="10" BackgroundColor="LightGray" Spacing="5">
                 <Button Text="Fetch and Save Asteroids" Clicked="FetchAndSaveAsteroids" />
                 <Button Text="Show Saved Asteroids" Clicked="ShowSavedAsteroids" />
                 <Button Text="Delete Database" Clicked="DeleteDB" />
             </StackLayout>
 
-            <!-- CollectionView for displaying asteroid data -->
-            <CollectionView x:Name="AsteroidsCollectionView" SelectionMode="None">
+                         <CollectionView x:Name="AsteroidsCollectionView" SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Padding="10" Margin="0,5" BorderColor="Gray" BackgroundColor="White" HasShadow="True">
                             <StackLayout Spacing="10" Orientation="Horizontal">
-                                <!-- Left side: Textual information -->
-                                <StackLayout Spacing="5">
+                                                                 <StackLayout Spacing="5">
                                     <Label Text="Name:" FontSize="14" FontAttributes="Bold" />
                                     <Label Text="{Binding Name}" FontSize="16" />
 
@@ -33,28 +28,19 @@
                                     <Label Text="{Binding RelativeVelocityKmPerSec}" FontSize="14" />
                                 </StackLayout>
 
-                                <!-- Right side: Graphical representation -->
-                                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="Center" RowSpacing="0" ColumnSpacing="10">
-                                    <!-- Define columns for layout -->
-                                    <Grid.ColumnDefinitions>
+                                                                 <Grid HorizontalOptions="FillAndExpand" VerticalOptions="Center" RowSpacing="0" ColumnSpacing="10">
+                                                                         <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
-                                        <!-- Size icon column -->
-                                        <ColumnDefinition Width="*"/>
-                                        <!-- Space for asteroid icon -->
-                                    </Grid.ColumnDefinitions>
+                                                                                 <ColumnDefinition Width="*"/>
+                                                                             </Grid.ColumnDefinitions>
 
-                                    <!-- Define rows for layout -->
-                                    <Grid.RowDefinitions>
+                                                                         <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
-                                        <!-- Row for size icon and asteroid icon -->
-                                        <RowDefinition Height="10"/>
-                                        <!-- Spacer row between icons and distance bar -->
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Row for the distance bar and planet icons -->
-                                    </Grid.RowDefinitions>
+                                                                                 <RowDefinition Height="10"/>
+                                                                                 <RowDefinition Height="Auto"/>
+                                                                             </Grid.RowDefinitions>
 
-                                    <!-- Placeholder for asteroid size icons on the left -->
-                                    <Image 
+                                                                         <Image 
                                         Source="{Binding SizeIcon}" 
                                         WidthRequest="50" 
                                         HeightRequest="50" 
@@ -63,8 +49,7 @@
                                         Grid.Column="0" 
                                         Grid.Row="0" />
 
-                                    <!-- Asteroid icon on the right -->
-                                    <Image 
+                                                                         <Image 
                                         Source="asteroid_icon.png" 
                                         WidthRequest="{Binding SizeIconWidth}" 
                                         HeightRequest="{Binding SizeIconHeight}" 
@@ -73,11 +58,9 @@
                                         Grid.Column="1" 
                                         Grid.Row="0" />
 
-                                    <!-- Spacer row between icons and distance bar -->
-                                    <Grid RowSpacing="0" Grid.Row="1" />
+                                                                         <Grid RowSpacing="0" Grid.Row="1" />
 
-                                    <!-- Distance bar -->
-                                    <BoxView 
+                                                                         <BoxView 
                                         HeightRequest="4" 
                                         Color="Gray" 
                                         VerticalOptions="End" 
@@ -86,8 +69,7 @@
                                         Grid.Row="2" 
                                         Grid.ColumnSpan="2"/>
 
-                                    <!-- Earth, Moon, and Asteroid icons for the distance bar -->
-                                    <Image 
+                                                                         <Image 
                                         Source="earth_icon.png" 
                                         WidthRequest="20" 
                                         HeightRequest="20" 
@@ -98,7 +80,7 @@
                                         Grid.Column="0"/>
 
                                     <!--<Image 
-                                        Source="moon_icon.png" 
+                                       Source="moon_icon.png" 
                                         WidthRequest="20" 
                                         HeightRequest="20" 
                                         VerticalOptions="End" 
@@ -106,8 +88,7 @@
                                         Grid.Row="2" 
                                         Grid.Column="1"/>-->
 
-                                    <!-- Adjust the asteroid's X position based on the MissDistanceKm -->
-                                    <Image 
+                                                                         <Image 
                                         Source="asteroid_icon.png" 
                                         WidthRequest="20" 
                                         HeightRequest="20" 

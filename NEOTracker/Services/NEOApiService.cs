@@ -18,19 +18,17 @@ namespace NEOTracker.Services
 
         public async Task<List<Asteroid>> FetchAsteroidsAsync()
         {
-            // Set the API key and construct the URL dynamically
-            if (!Preferences.Default.ContainsKey("Key"))
+                         if (!Preferences.Default.ContainsKey("Key"))
             {
                 Preferences.Default.Set("Key", "DEMO_KEY");
             }
-            //var apiKey = "zPmwhTa6grD5ahplZADOQrn7BOMvsDLUEgWHyWb5";
-            var apiKey = Preferences.Default.Get("Key", "DEMO_KEY");
+            var apiKey = "zPmwhTa6grD5ahplZADOQrn7BOMvsDLUEgWHyWb5";
+            //var apiKey = Preferences.Default.Get("Key", "DEMO_KEY");
             var currentDate = DateTime.UtcNow.ToString("yyyy-MM-dd");
             var qurrentDate = DateTime.UtcNow.AddDays(-7).ToString("yyyy-MM-dd");
             var apiUrl = $"https://api.nasa.gov/neo/rest/v1/feed?start_date={qurrentDate}&end_date={currentDate}&api_key={apiKey}";
 
-            // Fetch data from the API
-            var response = await _httpClient.GetAsync(apiUrl);
+                         var response = await _httpClient.GetAsync(apiUrl);
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 await Application.Current.MainPage.DisplayAlert("Bad response", "Check the api key", "OK");
@@ -38,22 +36,19 @@ namespace NEOTracker.Services
             }
             response.EnsureSuccessStatusCode();
 
-            // Read and parse the JSON response
-            var jsonResponse = await response.Content.ReadAsStringAsync();
+                         var jsonResponse = await response.Content.ReadAsStringAsync();
             var data = JsonSerializer.Deserialize<JsonDocument>(jsonResponse);
 
             var asteroids = new List<Asteroid>();
 
-            // Check if "near_earth_objects" exists
-            if (data.RootElement.TryGetProperty("near_earth_objects", out var neoObjects) &&
+                         if (data.RootElement.TryGetProperty("near_earth_objects", out var neoObjects) &&
                 neoObjects.ValueKind == JsonValueKind.Object)
             {
                 foreach (var dateProperty in neoObjects.EnumerateObject())
                 {
                     foreach (var asteroidElement in dateProperty.Value.EnumerateArray())
                     {
-                        // Construct the Asteroid object
-                        var asteroid = new Asteroid
+                                                 var asteroid = new Asteroid
                         {
                             NeoReferenceId = asteroidElement.GetProperty("neo_reference_id").GetString(),
                             Name = asteroidElement.GetProperty("name").GetString(),
@@ -70,8 +65,7 @@ namespace NEOTracker.Services
                             IsPotentiallyHazardous = asteroidElement.GetProperty("is_potentially_hazardous_asteroid").GetBoolean()
                         };
 
-                        // Handle closest future approach data
-                        if (asteroidElement.TryGetProperty("close_approach_data", out var closeApproaches) &&
+                                                 if (asteroidElement.TryGetProperty("close_approach_data", out var closeApproaches) &&
                             closeApproaches.ValueKind == JsonValueKind.Array)
                         {
                             var nextApproach = closeApproaches.EnumerateArray()
@@ -83,19 +77,16 @@ namespace NEOTracker.Services
                                 asteroid.CloseApproachDate = nextApproach.GetProperty("close_approach_date").GetString();
                                 asteroid.CloseApproachDateFull = nextApproach.GetProperty("close_approach_date_full").GetString();
 
-                                // Fix: Convert "kilometers_per_second" from string to double
-                                var relativeVelocity = nextApproach.GetProperty("relative_velocity");
+                                                                 var relativeVelocity = nextApproach.GetProperty("relative_velocity");
                                 var velocityString = relativeVelocity.GetProperty("kilometers_per_second").GetString();
                                 asteroid.RelativeVelocityKmPerSec = Convert.ToDouble(velocityString);
 
-                                // Fix: Convert "kilometers" in miss_distance from string to double
-                                var missDistance = nextApproach.GetProperty("miss_distance");
+                                                                 var missDistance = nextApproach.GetProperty("miss_distance");
                                 var missDistanceKmString = missDistance.GetProperty("kilometers").GetString();
                                 asteroid.MissDistanceKm = Convert.ToDouble(missDistanceKmString);
 
 
-                                // Get orbiting body
-                                asteroid.OrbitingBody = nextApproach.GetProperty("orbiting_body").GetString();
+                                                                 asteroid.OrbitingBody = nextApproach.GetProperty("orbiting_body").GetString();
                             }
                         }
 

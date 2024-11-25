@@ -8,6 +8,5 @@ namespace NEOTracker.Services
     {
         Task AddAsteroidAsync(Asteroid asteroid);
         Task<List<Asteroid>> GetAsteroidsAsync();
-        //Task DeleteAllAsteroidsAsync();
     }
 }

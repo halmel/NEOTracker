@@ -10,8 +10,7 @@ namespace NEOTracker.Views
         private readonly NEOApiService _apiService;
         private bool _isActionsVisible = false;
 
-        // ObservableCollection to bind to the CollectionView
-        private readonly ObservableCollection<Asteroid> _asteroids;
+                 private readonly ObservableCollection<Asteroid> _asteroids;
 
         public MainPage()
         {
@@ -21,16 +20,14 @@ namespace NEOTracker.Views
             _apiService = new NEOApiService();
 
             _asteroids = new ObservableCollection<Asteroid>();
-            AsteroidsCollectionView.ItemsSource = _asteroids; // Bind the CollectionView
-        }
+            AsteroidsCollectionView.ItemsSource = _asteroids;          }
         private void ToggleActionsVisibility(object sender, EventArgs e)
         {
             _isActionsVisible = !_isActionsVisible;
             ActionsList.IsVisible = _isActionsVisible;
         }
 
-        // Fetch and save asteroids from the API
-        private async void FetchAndSaveAsteroids(object sender, EventArgs e)
+                 private async void FetchAndSaveAsteroids(object sender, EventArgs e)
         {
             try
             {
@@ -55,15 +52,13 @@ namespace NEOTracker.Views
             }
         }
 
-        // Load saved asteroids from the database and display them
-        private async void ShowSavedAsteroids(object sender, EventArgs e)
+                 private async void ShowSavedAsteroids(object sender, EventArgs e)
         {
             try
             {
                 var savedAsteroids = await _databaseService.GetAsteroidsAsync();
 
-                // Clear the collection and populate with new data
-                _asteroids.Clear();
+                                 _asteroids.Clear();
                 foreach (var asteroid in savedAsteroids)
                 {
                     _asteroids.Add(asteroid);
